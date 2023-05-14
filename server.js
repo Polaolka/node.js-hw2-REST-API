@@ -1,14 +1,8 @@
 const app = require('./app');
 
-// # SECRET_KEY=QsUfDnRDQTofVfzU
-// mongodb+srv://olga:<password>@cluster0.aa9lqg7.mongodb.net/?retryWrites=true&w=majority
-
 const mongoose = require("mongoose");
 
 const {DB_HOST, PORT = 3000} = process.env;
-
-// const DB_HOST =
-//   "mongodb+srv://olga:QsUfDnRDQTofVfzU@cluster0.aa9lqg7.mongodb.net/db-contacts?retryWrites=true&w=majority";
 
 mongoose
   .connect(DB_HOST)
@@ -21,6 +15,3 @@ mongoose
     process.exit(1);
   });
 
-// app.listen(3000, () => {
-//   console.log("Server running. Use our API on port: 3000")
-// })
