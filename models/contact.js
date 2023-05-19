@@ -12,13 +12,20 @@ const contactSchema = new Schema(
     },
     email: {
       type: String,
+      default: "",
     },
     phone: {
       type: String,
+      default: "",
     },
     favorite: {
       type: Boolean,
       default: false,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }
@@ -28,7 +35,9 @@ contactSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }).required(),
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .required(),
   phone: Joi.string().pattern(phoneRegex).required(),
   favorite: Joi.boolean(),
 });
