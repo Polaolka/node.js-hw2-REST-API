@@ -8,11 +8,6 @@ const allowedSubscriptions = ['starter', 'pro', 'business'];
 
 const userSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: [true, "Set name for user"],
-      minlength: 3,
-    },
     password: {
       type: String,
       required: [true, "Set password for user"],
@@ -40,9 +35,9 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
   email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string().min(6).required(),
+  subscription: Joi.string().valid(...allowedSubscriptions),
 });
 
 const loginSchema = Joi.object({

@@ -42,7 +42,7 @@ const validateSubscrBody = (schema) => {
 
     const { error } = schema.validate(req.body);
     if (Object.keys(req.body).length === 0) {
-      res.status(400).json({ message: `missing field favorite` });
+      res.status(400).json({ message: `missing field subscription` });
       return;
     } 
     if (error) {
