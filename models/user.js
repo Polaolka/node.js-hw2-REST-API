@@ -4,7 +4,7 @@ const Joi = require("joi");
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-const allowedSubscriptions = ['starter', 'pro', 'business'];
+const allowedSubscriptions = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
   {
@@ -28,6 +28,10 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    avatarURL: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -46,13 +50,15 @@ const loginSchema = Joi.object({
 });
 
 const updateSubscriptionSchema = Joi.object({
-  subscription: Joi.string().required().valid(...allowedSubscriptions),
+  subscription: Joi.string()
+    .required()
+    .valid(...allowedSubscriptions),
 });
 
 const schemas = {
   registerSchema,
   loginSchema,
-  updateSubscriptionSchema
+  updateSubscriptionSchema,
 };
 
 const User = model("user", userSchema);
